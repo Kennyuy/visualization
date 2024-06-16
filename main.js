@@ -1,21 +1,18 @@
-document.getElementById('input-file').addEventListener('change', handleFile, false);
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('商品订单表.xlsx')
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            const workbook = XLSX.read(data, { type: 'array' });
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
 
-function handleFile(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
+            const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+            processExcelData(jsonData);
+        })
+        .catch(error => console.error('Error loading Excel file:', error));
 
-    reader.onload = function(e) {
-        const data = new Uint8Array(e.target.result);
-        const workbook = XLSX.read(data, { type: 'array' });
-        const firstSheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[firstSheetName];
-
-        const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-        processExcelData(jsonData);
-    };
-
-    reader.readAsArrayBuffer(file);
-}
+    loadMapData();
+});
 
 function processExcelData(data) {
     const headers = data[0];
@@ -52,7 +49,6 @@ function processExcelData(data) {
     const managerSalesData = Object.keys(managerSales).map(key => ({ name: key, value: Math.round(managerSales[key]) })); // 取整
 
     initCharts(orderDateData, storeNames, storeSalesData, storeProfitData, managerSalesData);
-    loadMapData();
 }
 
 function initCharts(orderDateData, storeNames, storeSalesData, storeProfitData, managerSalesData) {
