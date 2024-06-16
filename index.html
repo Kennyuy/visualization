@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style1.css">
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-    <script src="https://api.map.baidu.com/api?v=3.0&ak=meJntg918E1SyY7m76jvTcmrGoDvQkYL"></script> <!-- Replace '你的密钥' with your Baidu Maps API key -->
+    <script src="https://api.map.baidu.com/api?v=3.0&ak=meJntg918E1SyY7m76jvTcmrGoDvQkYL"></script>
     <style>
         #charts-container {
             display: flex;
@@ -20,17 +20,16 @@
         }
         #map-container {
             width: 80%;
-            height: 500px;
+            height: 400px;
         }
     </style>
 </head>
 <body>
-<input type="file" id="input-file">
 <div id="charts-container">
     <div id="order-date-chart" class="chart"></div>
     <div id="store-chart" class="chart"></div>
     <div id="manager-sales-chart" class="chart"></div>
-    <div id="map-container"></div>
+    <div id="map-container" class="chart"></div>
 </div>
 <script src="main.js"></script>
 </body>
