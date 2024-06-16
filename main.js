@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('商品订单表.xlsx')
+    fetch('/public/商品订单表.xlsx')
         .then(response => response.arrayBuffer())
         .then(data => {
             const workbook = XLSX.read(data, { type: 'array' });
@@ -92,7 +92,7 @@ function initCharts(orderDateData, storeNames, storeSalesData, storeProfitData, 
 }
 
 function loadMapData() {
-    fetch('data.json')
+    fetch('/public/data.json')
         .then(response => response.json())
         .then(data => {
             initMap(data);
